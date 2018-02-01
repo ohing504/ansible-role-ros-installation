@@ -1,0 +1,8 @@
+---
+ros_installation_ros_release: "kinetic"
+ros_installation_ros_package: "desktop-full"
+ros_installation_ros_repository: "http://packages.ros.org/ros/ubuntu"
+ros_installation_ros_keyserver: "hkp://ha.pool.sks-keyservers.net:80"
+ros_installation_ros_keyid: "421C365BD9FF1F717815A3895523BAEEB01FA116"
+
+ros_installation_install_dependencies: true

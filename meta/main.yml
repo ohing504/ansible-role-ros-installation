@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  author: Youngsup Oh
+  description: Robot Operating System (ROS) installer for Ubuntu.
+  company: REMVO
+  license: MIT
+  min_ansible_version: 1.9
+  github_branch: master
+  platforms:
+    - name: Ubuntu
+      versions:
+      - xenial
+  galaxy_tags:
+    - ROS
+    - installer
+
+dependencies: []

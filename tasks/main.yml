@@ -1,0 +1,42 @@
+---
+- name: Add ROS repository into sources list
+  apt_repository:
+    repo: "deb {{ ros_installation_ros_repository }} {{ ansible_lsb.codename }} main"
+    state: present
+
+- name: Add ROS repository key by id from a keyserver
+  apt_key:
+    keyserver: "{{ ros_installation_ros_keyserver }}"
+    id: "{{ ros_installation_ros_keyid }}"
+
+- name: Resynchronize the package index files from their sources
+  apt:
+    update_cache: yes
+
+- name: Install desired ROS package
+  apt:
+    name: "ros-{{ ros_installation_ros_release }}-{{ ros_installation_ros_package }}"
+    state: present
+
+- name: Check the rosdep is initialized
+  stat:
+    path: /etc/ros/rosdep/sources.list.d/20-default.list
+  register: rosdep_repository
+
+- name: Initialize rosdep
+  raw: sudo rosdep init
+  when: rosdep_repository.stat.exists == false
+
+- name: Resynchronize the rosdep package index files
+  raw: rosdep update
+
+- name: Install dependencies for building ROS packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python-rosinstall
+    - python-rosinstall-generator
+    - python-wstool
+    - build-essential
+  when: ros_installation_install_dependencies
