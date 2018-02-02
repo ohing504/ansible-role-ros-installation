@@ -29,7 +29,7 @@ None
 
     - hosts: servers
       roles:
-         - { role: username.rolename }
+         - { role: ohing504.ros-installation }
 
 ## License
 
