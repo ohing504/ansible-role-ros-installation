@@ -1,13 +1,13 @@
 ---
-- name: Add ROS repository into sources list
-  apt_repository:
-    repo: "deb {{ ros_installation_ros_repository }} {{ ansible_lsb.codename }} main"
-    state: present
-
 - name: Add ROS repository key by id from a keyserver
   apt_key:
     keyserver: "{{ ros_installation_ros_keyserver }}"
     id: "{{ ros_installation_ros_keyid }}"
+    
+- name: Add ROS repository into sources list
+  apt_repository:
+    repo: "deb {{ ros_installation_ros_repository }} {{ ansible_lsb.codename }} main"
+    state: present
 
 - name: Resynchronize the package index files from their sources
   apt:
